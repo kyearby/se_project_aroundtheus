@@ -1,0 +1,126 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  padding: 0 19px;
+  /* display: none; */
+  display: flex;
+  font-family: "Inter",Arial, Helvetica, sans-serif;
+}
+
+.modal__container {
+  position: relative;
+  padding: 36px;
+  background-color: #fff;
+  color: #000;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  margin: auto;
+  border-radius: 10px;
+  max-height: 330px;
+  max-width: 430px;
+}
+
+/* .modal__opened {
+  display: flex;
+} */
+
+.modal__heading{
+  color: #000;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29.05px;
+  max-width: 330px;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.modal__form {
+  margin-top: 54px;
+  display: grid;
+  width: 358px;
+}
+
+input {
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  line-height: 27px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+input:last-of-type{
+  margin-top: 29.75px;
+}
+
+.modal__button{
+  margin-top: 48px;
+  background-color: #000;
+  color: #fff;
+  height: 50.15px;
+  font-size: 18px;
+  font-weight: 400px;
+  line-height: 18px;
+  border-radius: 5px;
+}
+
+.modal__close {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: absolute;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+  width: 40px;
+  height: 40px;
+  background-image: url(../Images/Close\ Icon.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+@media screen and (max-width: 700px) {
+  .modal__close {
+    padding-right: 19px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .modal__container {
+    position: relative;
+    margin: auto;
+    max-height: 322px;
+    max-width: 282px;
+    padding: 22px;
+    box-sizing: border-box;
+  }
+
+  .modal__form {
+    margin-top: 75px;
+  }
+
+  .modal__heading {
+    max-width: 238px;
+    font-size: 18px;
+    font-weight: 900;
+    line-height: 21.78px;
+  }
+
+  input {
+    max-width: 238px;
+  }
+
+  .modal__button {
+    max-width: 238px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 16.94px;
+  }
+
+  .modal__close {
+    height: 26px;
+    width: 26px;
+  }
+}
