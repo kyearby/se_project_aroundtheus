@@ -7,8 +7,8 @@
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
   padding: 0 19px;
-  /* display: none; */
-  display: flex;
+  display: none;
+  /* display: flex; */
   font-family: "Inter",Arial, Helvetica, sans-serif;
 }
 
@@ -24,9 +24,9 @@
   max-width: 430px;
 }
 
-/* .modal__opened {
+.modal__opened {
   display: flex;
-} */
+}
 
 .modal__heading{
   color: #000;
