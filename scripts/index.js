@@ -31,24 +31,31 @@ const cardTemplate = document.querySelector("#card-template").content.firstEleme
 //Wrappers
 const cardListEl = document.querySelector(".cards__list");
 const editProfielModal = document.querySelector("#edit-modal");
-const addCardModal = document.querySelector("#add-card-modal")
+const addCardModal = document.querySelector("#add-card-modal");
+const previewModal = document.querySelector("#preview-modal");
 const profileEditForm = editProfielModal.querySelector(".modal__form");
 const addCardForm = addCardModal.querySelector(".modal__form");
+
+const previewImageModal = previewModal.querySelector(".card__image");
+const previewCaptionModal = document.querySelector(".modal__caption");
+
 
 //Buttons and Nodes
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileModalCloseButton = editProfielModal.querySelector(".modal__close");
 const addCardModalCloseButton = addCardModal.querySelector(".modal__close");
+const previewModalCloseButton = previewModal.querySelector(".modal__close");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const addNewCardButton = document.querySelector(".profile__add-button");
+
 
 //Form Data
 const nameInput = profileEditForm.querySelector(".modal__input_type_name");
 const jobInput = profileEditForm.querySelector(".modal__input_type_description");
 
-const cardTitleInput = addCardForm.querySelector('.modal__input_type_title')
-const cardUrlInput = addCardForm.querySelector('.modal__input_type_url')
+const cardTitleInput = addCardForm.querySelector('.modal__input_type_title');
+const cardUrlInput = addCardForm.querySelector('.modal__input_type_url');
 
 
 function closeModal(modal) {
@@ -100,6 +107,15 @@ function getCard(data) {
       likeButton.classList.toggle("card__like-button_active");
       });
 
+cardDelete.addEventListener("click", () => {
+  cardElement.remove("disabled");
+});
+
+cardImage.addEventListener("click", () => {
+  openModal(previewModal);
+  previewImageModal.src = data.link;
+  previewImageModal.alt = data.alt;
+});
 
   cardImage.src = data.link;
   cardImage.alt = data.name;
