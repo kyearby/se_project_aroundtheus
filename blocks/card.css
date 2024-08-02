@@ -34,8 +34,11 @@
   margin: 0;
 }
 
-.card__delete{
+.card__delete-button{
   background: transparent url(../Images/Trash-inactive.svg) center no-repeat;
+  border-width: 0;
+  height: 32px;
+  width: 32px;
   top: 18px;
   left: 249px;
   position: absolute;
