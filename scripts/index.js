@@ -36,7 +36,7 @@ const previewModal = document.querySelector("#preview-modal");
 const profileEditForm = editProfielModal.querySelector(".modal__form");
 const addCardForm = addCardModal.querySelector(".modal__form");
 
-const previewImageModal = previewModal.querySelector(".card__image");
+const previewImageModal = document.querySelector(".modal__image");
 const previewCaptionModal = document.querySelector(".modal__caption");
 
 
@@ -115,6 +115,7 @@ cardImage.addEventListener("click", () => {
   openModal(previewModal);
   previewImageModal.src = data.link;
   previewImageModal.alt = data.alt;
+  previewCaptionModal.textContent = data.name;
 });
 
   cardImage.src = data.link;
@@ -136,6 +137,7 @@ profileEditButton.addEventListener("click", () => {
 profileModalCloseButton.addEventListener("click", () => closeModal(editProfielModal));
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 addCardModalCloseButton.addEventListener("click", () => closeModal(addCardModal));
+previewModalCloseButton.addEventListener("click",() => closeModal(previewModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
