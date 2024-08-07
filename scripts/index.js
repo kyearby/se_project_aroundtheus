@@ -95,17 +95,10 @@ function getCard(data) {
   const cardTitle = cardElement.querySelector(".card__title");
   const likeButton = cardElement.querySelector(".card__like-button"); 
   const cardDelete = cardElement.querySelector(".card__delete-button");
-// find delete button
 
-//add event listener to the delete button
-//cardElement.remove(). when button is clicked
-
-// add click listener to the cardImage element
-// openModal with previewImageModal
-
-   likeButton.addEventListener("click", () => {
-      likeButton.classList.toggle("card__like-button_active");
-      });
+likeButton.addEventListener("click", () => {
+  likeButton.classList.toggle("card__like-button_active");
+  });
 
 cardDelete.addEventListener("click", () => {
   cardElement.remove("disabled");
@@ -114,7 +107,7 @@ cardDelete.addEventListener("click", () => {
 cardImage.addEventListener("click", () => {
   openModal(previewModal);
   previewImageModal.src = data.link;
-  previewImageModal.alt = data.alt;
+  previewImageModal.alt = data.name;
   previewCaptionModal.textContent = data.name;
 });
 
