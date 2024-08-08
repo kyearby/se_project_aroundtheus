@@ -25,7 +25,11 @@
           />
           <div class="profile__info">
             <h1 class="profile__title">jacques-cousteau</h1>
-            <button class="profile__edit-button" id="profile-edit-button" type="button"></button>
+            <button
+              class="profile__edit-button"
+              id="profile-edit-button"
+              type="button"
+            ></button>
             <p class="profile__description">Explorer</p>
           </div>
           <button class="profile__add-button" type="button"></button>
@@ -38,10 +42,14 @@
         <p class="footer__copyright">&copy; 2024 Around The U.S.</p>
       </footer>
     </div>
-<!-- Edit Modal -->
+    <!-- Edit Modal -->
     <div class="modal" id="edit-modal">
       <div class="modal__content">
-        <button class="modal__close" id="modal-close-button" type="button"></button>
+        <button
+          class="modal__close"
+          id="modal-close-button"
+          type="button"
+        ></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form" id="edit-profile-form">
           <input
@@ -63,7 +71,11 @@
     <!-- Add card modal -->
     <div class="modal" id="add-card-modal">
       <div class="modal__content">
-        <button class="modal__close" id="modal-close-button" type="button"></button>
+        <button
+          class="modal__close"
+          id="modal-close-button"
+          type="button"
+        ></button>
         <p class="modal__heading">New Place</p>
         <form class="modal__form" id="add-card-form">
           <input
@@ -84,11 +96,15 @@
     </div>
     <!-- Open card preview -->
     <div class="modal" id="preview-modal">
-        <div class="modal__content modal__content-preview">
-          <button type="button" class="modal__close " id="modal__close-preview"></button>
-          <img class="modal__image" src="" alt=""/>
-          <p class="modal__caption"></p>
-        </div>
+      <div class="modal__content modal__content-preview">
+        <button
+          type="button"
+          class="modal__close"
+          id="modal__close-preview"
+        ></button>
+        <img class="modal__image" src="" alt="" />
+        <p class="modal__caption"></p>
+      </div>
     </div>
     <template id="card-template">
       <li class="card">

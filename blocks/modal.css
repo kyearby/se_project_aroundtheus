@@ -113,7 +113,7 @@ input:last-of-type {
 .modal__caption {
   margin: auto auto auto 0;
   padding: 4px 8px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: transparent;
   color: #fff;
   font-size: 20px;
   line-height: 1.2;
