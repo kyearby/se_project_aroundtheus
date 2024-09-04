@@ -63,7 +63,7 @@
   gap: 30px;
 }
 
-input {
+.modal__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
   line-height: 27px;
@@ -71,7 +71,7 @@ input {
   font-weight: 400;
 }
 
-input:last-of-type {
+.modal__input:last-of-type {
   margin-top: 29.75px;
 }
 
