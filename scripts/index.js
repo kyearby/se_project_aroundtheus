@@ -48,13 +48,11 @@ const profileDescription = document.querySelector(".profile__description");
 const addNewCardButton = document.querySelector(".profile__add-button");
 
 //Form Data
-const nameInput = profileEditForm.querySelector(".modal__input_type_name");
-const jobInput = profileEditForm.querySelector(
-  ".modal__input_type_description"
-);
+const nameInput = profileEditForm.querySelector("#name-input");
+const jobInput = profileEditForm.querySelector("#description-input");
 
-const cardTitleInput = addCardForm.querySelector(".modal__input_type_title");
-const cardUrlInput = addCardForm.querySelector(".modal__input_type_url");
+const cardTitleInput = addCardForm.querySelector("#card-input-title");
+const cardUrlInput = addCardForm.querySelector("#card-input-url");
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
