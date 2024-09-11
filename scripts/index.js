@@ -56,10 +56,13 @@ const cardUrlInput = addCardForm.querySelector("#card-input-url");
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEsc)
+  document.addEventListener("click", handleOverlay);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEsc);
 }
 
 function renderCard(cardData) {
@@ -83,6 +86,21 @@ function handleAddCardSubmit(e) {
   addCardForm.reset();
   closeModal(addCardModal);
 }
+
+function handleOverlay (e) {
+  if (e.target.classList.contains("modal_opened")){
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
+  }
+}
+
+function handleEsc(e) {
+  if (e.key === "Escape"){
+    const openedModal = document.querySelector(".modal_opened");
+      closeModal(openedModal);
+    }
+  }
+
 
 function getCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
@@ -124,6 +142,10 @@ profileEditButton.addEventListener("click", () => {
 closeButtons.forEach((button) => {
   const modal = button.closest(".modal");
   button.addEventListener("click", () => closeModal(modal));
+});
+
+[profileEditForm,addCardForm,previewImageModal].forEach((modal) => {
+  modal.addEventListener("click", handleOverlay);
 });
 
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
