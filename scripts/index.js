@@ -57,7 +57,7 @@ const cardUrlInput = addCardForm.querySelector("#card-input-url");
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEsc);
-  modal.removeEventListener("click",handleOverlay);
+  modal.removeEventListener("click", handleOverlay);
 }
 
 function openModal(modal) {
@@ -88,19 +88,18 @@ function handleAddCardSubmit(e) {
   closeModal(addCardModal);
 }
 
-function handleOverlay (e) {
-  if (e.target.classList.contains("modal_opened")){
+function handleOverlay(e) {
+  if (e.target.classList.contains("modal_opened")) {
     closeModal(e.target);
   }
 }
 
 function handleEsc(e) {
-  if (e.key === "Escape"){
+  if (e.key === "Escape") {
     const openedModal = document.querySelector(".modal_opened");
-      closeModal(openedModal);
-    }
+    closeModal(openedModal);
   }
-
+}
 
 function getCard(data) {
   const cardElement = cardTemplate.cloneNode(true);
