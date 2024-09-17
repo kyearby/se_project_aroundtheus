@@ -144,10 +144,6 @@ closeButtons.forEach((button) => {
   button.addEventListener("click", () => closeModal(modal));
 });
 
-[profileEditForm,addCardForm,previewImageModal].forEach((modal) => {
-  modal.addEventListener("click", handleOverlay);
-});
-
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
