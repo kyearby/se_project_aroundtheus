@@ -171,15 +171,16 @@
 
 @media screen and (max-width: 620px) and (min-width: 320px) {
   .modal__content {
-    padding: 25px 22px;
+    padding: 25px 22px 0;
     width: 282px;
     max-height: 322px;
   }
 
   .modal__close {
-    padding: 25px 22px;
-    width: 282px;
-    max-height: 322px;
+    width: 26px;
+    height: 26px;
+    left: calc(100% - 25px);
+    margin-bottom: 14px;
   }
 
   .modal__form {
@@ -212,6 +213,6 @@
     font-size: 14px;
     line-height: 17px;
     text-align: center;
-    margin: 0;
+    margin: 46px 0 25px;
   }
 }

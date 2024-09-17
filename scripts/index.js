@@ -56,13 +56,14 @@ const cardUrlInput = addCardForm.querySelector("#card-input-url");
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEsc)
-  document.addEventListener("click", handleOverlay);
+  document.removeEventListener("keydown", handleEsc);
+  modal.removeEventListener("click",handleOverlay);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keydown", handleEsc);
+  modal.addEventListener("click", handleOverlay);
 }
 
 function renderCard(cardData) {
@@ -89,8 +90,7 @@ function handleAddCardSubmit(e) {
 
 function handleOverlay (e) {
   if (e.target.classList.contains("modal_opened")){
-    const openedModal = document.querySelector(".modal_opened");
-    closeModal(openedModal);
+    closeModal(e.target);
   }
 }
 
@@ -114,7 +114,7 @@ function getCard(data) {
   });
 
   cardDelete.addEventListener("click", () => {
-    cardElement.remove("disabled");
+    cardElement.remove();
   });
 
   cardImage.addEventListener("click", () => {
