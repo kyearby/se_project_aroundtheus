@@ -209,7 +209,14 @@
     padding: 0;
   }
 
-  .modal__button {
+  .modal__button:enabled {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    margin: 46px 0 25px;
+  }
+
+  .modal__button:disabled {
     font-size: 14px;
     line-height: 17px;
     text-align: center;

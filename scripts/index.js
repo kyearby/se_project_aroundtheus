@@ -1,4 +1,5 @@
-
+import FormValidator from "../components/FormValidator.js";
+import Card from "../components/Card.js";
 
 const initialCards = [
   {
@@ -26,13 +27,6 @@ const initialCards = [
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg",
   },
 ];
-
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-}
-
-const card = new Card(cardData);
 
 const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
@@ -63,6 +57,14 @@ const jobInput = profileEditForm.querySelector("#description-input");
 const cardTitleInput = addCardForm.querySelector("#card-input-title");
 const cardUrlInput = addCardForm.querySelector("#card-input-url");
 
+const validationSettings = {
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keydown", handleEsc);
@@ -75,9 +77,14 @@ function openModal(modal) {
   modal.addEventListener("click", handleOverlay);
 }
 
-function renderCard(cardData) {
-  const cardElement = getCard(cardData);
-  cardListEl.prepend(cardElement);
+function createCard(cardData) {
+  const card = new Card(cardData, "#card-template", handleImagePreview);
+  return card.getView();
+}
+
+function renderCard(cardData, wrapper) {
+  const cardElement = createCard(cardData);
+  wrapper.prepend(cardElement);
 }
 
 function handleProfileEditSubmit(e) {
@@ -97,6 +104,14 @@ function handleAddCardSubmit(e) {
   closeModal(addCardModal);
 }
 
+function handleImagePreview(cardData) {
+  previewImageModal.src = cardData.link;
+  previewImageModal.alt = cardData.name;
+  previewCaptionModal.textContent = cardData.name;
+
+  openModal(previewModal);
+}
+
 function handleOverlay(e) {
   if (e.target.classList.contains("modal_opened")) {
     closeModal(e.target);
@@ -108,35 +123,6 @@ function handleEsc(e) {
     const openedModal = document.querySelector(".modal_opened");
     closeModal(openedModal);
   }
-}
-
-function getCard(data) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImage = cardElement.querySelector(".card__image");
-  const cardTitle = cardElement.querySelector(".card__title");
-  const likeButton = cardElement.querySelector(".card__like-button");
-  const cardDelete = cardElement.querySelector(".card__delete-button");
-
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-
-  cardDelete.addEventListener("click", () => {
-    cardElement.remove();
-  });
-
-  cardImage.addEventListener("click", () => {
-    openModal(previewModal);
-    previewImageModal.src = data.link;
-    previewImageModal.alt = data.name;
-    previewCaptionModal.textContent = data.name;
-  });
-
-  cardImage.src = data.link;
-  cardImage.alt = data.name;
-  cardTitle.textContent = data.name;
-
-  return cardElement;
 }
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
@@ -155,3 +141,13 @@ closeButtons.forEach((button) => {
 addNewCardButton.addEventListener("click", () => openModal(addCardModal));
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+
+const editFormValidator = new FormValidator(
+  validationSettings,
+  profileEditForm
+);
+
+const addFormValidator = new FormValidator(validationSettings, addCardForm);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
