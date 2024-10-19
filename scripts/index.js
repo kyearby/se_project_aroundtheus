@@ -40,6 +40,8 @@ const addCardModal = document.querySelector("#add-card-modal");
 const previewModal = document.querySelector("#preview-modal");
 const profileEditForm = editProfielModal.querySelector(".modal__form");
 const addCardForm = addCardModal.querySelector(".modal__form");
+const modalSubmitButton = addCardForm.querySelector(".modal__button");
+
 
 const previewImageModal = document.querySelector(".modal__image");
 const previewCaptionModal = document.querySelector(".modal__caption");
@@ -99,7 +101,7 @@ function handleAddCardSubmit(e) {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({ name, link }, cardListEl);
-
+  addFormValidator.disableSubmitButton();
   addCardForm.reset();
   closeModal(addCardModal);
 }
