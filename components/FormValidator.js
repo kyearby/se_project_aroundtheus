@@ -42,8 +42,7 @@ class FormValidator {
     if (invalidInput) {
 
       this.disableSubmitButton();
-      // this._disableSubmitButton.classList.add(this._inactiveButtonClass);
-      // this._submitButton.disabled = true;
+
     } else {
       this._submitButton.classList.remove(this._inactiveButtonClass);
       this._submitButton.disabled = false;
