@@ -38,8 +38,8 @@ const userInfo = new UserInfo({
 
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
-  handleFormSubmit: ({ name, link }) => {
-    const cardElement = createCard({ name, link });
+  handleFormSubmit: ({ name, url }) => {
+    const cardElement = createCard({ name, link: url });
     cardList.addItem(cardElement);
     addCardPopup.close();
     addCardPopup.resetForm();
