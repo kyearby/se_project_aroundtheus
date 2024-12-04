@@ -9,6 +9,8 @@ import {
   initialCards,
   validationSettings,
   addNewCardButton,
+  nameInput,
+  descriptionInput,
 } from "../utils/constants.js";
 
 const editFormElement = document.querySelector("#edit-modal");
@@ -21,20 +23,22 @@ const imagePopup = new PopupWithImage({
   popupSelector: "#preview-modal",
 });
 
+
+const userInfo = new UserInfo({
+  nameSelector: "#profile-title",
+  jobSelector: "#profile-description",
+});
+
 const editProfilePopup = new PopupWithForm({
   popupSelector: "#edit-modal",
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data);
+    userInfo.setUserInfo(data.name , data.job);
     editProfilePopup.close();
     editProfilePopup.resetForm();
     editFormValidator.disableSubmitButton();
   },
 });
 
-const userInfo = new UserInfo({
-  nameSelector: "#profile-title",
-  jobSelector: "#profile-description",
-});
 
 const addCardPopup = new PopupWithForm({
   popupSelector: "#add-card-modal",
@@ -79,6 +83,9 @@ addCardPopup.setEventListeners();
 imagePopup.setEventListeners();
 
 profileEditBtn.addEventListener("click", () => {
+  const currentUserInfo = userInfo.getUserInfo();
+  nameInput.value = currentUserInfo.name;
+  descriptionInput.value = currentUserInfo.description;
   editProfilePopup.open();
 });
 

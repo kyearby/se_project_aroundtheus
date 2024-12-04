@@ -35,4 +35,4 @@ export const initialCards = [
 
 export const addNewCardButton = document.querySelector(".profile__add-button");
 export const nameInput = document.querySelector("#name-input");
-export const jobInput = document.querySelector("#description-input");
+export const descriptionInput = document.querySelector("#description-input");
