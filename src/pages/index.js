@@ -32,7 +32,7 @@ const userInfo = new UserInfo({
 const editProfilePopup = new PopupWithForm({
   popupSelector: "#edit-modal",
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo(data.name , data.job);
+    userInfo.setUserInfo({name: data.name , description: data.description});
     editProfilePopup.close();
     editProfilePopup.resetForm();
     editFormValidator.disableSubmitButton();
