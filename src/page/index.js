@@ -1,10 +1,10 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
-import "../page/index.css";
-import Section from "../page/Section.js";
-import PopupWithImage from "../page/PopupWithImage.js";
-import PopupWithForm from "../page/PopupWithForm.js";
-import UserInfo from "../page/UserInfo.js";
+import "../components/index.css";
+import Section from "../components/Section.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
 import {
   initialCards,
   validationSettings,
@@ -13,7 +13,7 @@ import {
   descriptionInput,
 } from "../utils/constants.js";
 
-const editFormElement = document.querySelector("#edit-profile-modal");
+const editFormElement = document.querySelector("#edit-profile-form");
 const addFormElement = document.querySelector("#add-card-form");
 const profileEditBtn = document.querySelector("#profile-edit-button");
 
@@ -30,7 +30,7 @@ const userInfo = new UserInfo({
 });
 
 const editProfilePopup = new PopupWithForm({
-  popupSelector: "#edit-profile-modal",
+  popupSelector: "#edit-modal",
   handleFormSubmit: (data) => {
     userInfo.setUserInfo({name: data.name , description: data.description});
     editProfilePopup.close();
@@ -41,7 +41,7 @@ const editProfilePopup = new PopupWithForm({
 
 
 const addCardPopup = new PopupWithForm({
-  popupSelector: "#add-card-form",
+  popupSelector: "#add-card-modal",
   handleFormSubmit: ({ name, url }) => {
     const cardElement = createCard({ name, link: url });
     cardList.addItem(cardElement);
