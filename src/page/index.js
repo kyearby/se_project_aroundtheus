@@ -35,7 +35,7 @@ const userInfo = new UserInfo({
 const editProfilePopup = new PopupWithForm({
   popupSelector: "#edit-modal",
   handleFormSubmit: (data) => {
-    userInfo.setUserInfo({ name: data.name, description: data.description });
+    userInfo.setUserInfo({ name: data.name, job: data.description });
     editProfilePopup.close();
     editProfilePopup.resetForm();
     editFormValidator.disableSubmitButton();
@@ -129,11 +129,11 @@ api
 
 function renderCardsUserInfo() {
   return Promise.all([api.getInitialCards(), api.getUserInfo()]).then(
-    ([cards, userData]) => {
+    ([cards, userInfo]) => {
       cardList.renderItems(cards);
       userInfo.setUserInfo({
-        name: userData.name,
-        job: userData.about,
+        name: userInfo.name,
+        job: userInfo.about,
       });
       userInfo.setUserAvatar({
         avatar: userData.avatar,
