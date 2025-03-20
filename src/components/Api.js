@@ -54,7 +54,7 @@ export default class Api {
     return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
       method: "POST",
       header: {
-        Authorization: "89dc4b2f-fab0-42f3-ad8c-2593f7f5189c",
+        Authorization: "1aa088ef-da11-4fda-a5d3-4724ce53b405",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -72,7 +72,7 @@ export default class Api {
     return fetch("https://around-api.en.tripleten-services.com/v1/users/me", {
       method: "PATCH",
       headers: {
-        Authorization: "89dc4b2f-fab0-42f3-ad8c-2593f7f5189c",
+        Authorization: "1aa088ef-da11-4fda-a5d3-4724ce53b405",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -92,7 +92,7 @@ export default class Api {
       {
         method: "PATCH",
         headers: {
-          Authorization: "89dc4b2f-fab0-42f3-ad8c-2593f7f5189c",
+          Authorization: "1aa088ef-da11-4fda-a5d3-4724ce53b405",
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -105,5 +105,38 @@ export default class Api {
       }
       return response.json();
     });
+  }
+
+  handleDeleteCard(name, link) {
+    return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+      method: "POST",
+      headers: {
+        Authorization: "1aa088ef-da11-4fda-a5d3-4724ce53b405",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      }),
+    }).then((response) => {
+      if (!response.ok) {
+        return Promise.reject(`Error: ${response.status}`);
+      }
+      return response.json();
+    });
+  }
+
+  updateLikeStatus(cardId, isLiked) {
+    return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
+      method: isLiked ? "PUT" : "DELETE",
+      headers: this.headers,
+    }).then((response) => this._handleResponse(response));
+  }
+
+  _handleResponse(response) {
+    if (!response.ok) {
+      return Promise.reject(`Error: ${response.status}`);
+    }
+    return response.json();
   }
 }
