@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around the U.S</title>
-    
   </head>
   <body class="page">
     <div class="page__content">
@@ -18,19 +17,24 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./Images/jacques-cousteau.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
+          <div class="profile__avatar-container" id="avatar-edit-button">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="Avatar"
+              class="profile__image"
+            />
+            <div class="profile__avatar-overlay"></div>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__title" id="profile-title">jacques-cousteau</h1>
+            <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
             <button
               class="profile__edit-button"
               id="profile-edit-button"
               type="button"
             ></button>
-            <p class="profile__description" id="profile-description">Explorer</p>
+            <p class="profile__description" id="profile-description">
+              Explorer
+            </p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -108,7 +112,7 @@
             class="modal__input"
             id="card-input-url"
             name="url"
-            placeholder="Image URL"
+            placeholder="image URL"
             type="url"
             required
           />
@@ -122,6 +126,42 @@
             type="submit"
             disabled
           >
+            Save
+          </button>
+        </form>
+      </div>
+    </div>
+    <!--Delete Card Modal-->
+    <div class="modal" id="delete-confirm-modal">
+      <div class="modal__content modal__content_confirm">
+        <button type="button" class="modal__close"></button>
+        <h2 class="modal__heading">Are you sure?</h2>
+        <form class="modal__form">
+          <button type="button" class="modal__button modal__button_confirm">
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Avatar Modal-->
+    <div class="modal" id="avatar-modal">
+      <div class="modal__content">
+        <button
+          class="modal__close"
+          id="modal-close-button"
+          type="button"
+        ></button>
+        <h2 class="modal__heading">Edit Avatar</h2>
+        <form class="modal__form" id="add-profile-form">
+          <input
+            class="modal__input"
+            id="avatar-input-url"
+            name="avatar"
+            type="url"
+            placeholder="Avatar URL"
+            required
+          />
+          <button class="modal__button" id="profile-save-btn" type="submit">
             Save
           </button>
         </form>

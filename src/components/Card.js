@@ -1,9 +1,20 @@
 export default class Card {
-  constructor(cardData, cardTemplate, handleImagePreviewClick) {
+  constructor(
+    cardData,
+    cardTemplate,
+    handleImagePreviewClick,
+    handleDeleteRequest,
+    handleLikeRequest,
+    openDeleteConfirm
+  ) {
     this._name = cardData.name;
     this._link = cardData.link;
+    this._id = cardData._id;
     this._cardTemplate = cardTemplate;
     this._handleImagePreviewClick = handleImagePreviewClick;
+    this._handleDeleteRequest = handleDeleteRequest;
+    this._handleLikeRequest = handleLikeRequest;
+    this._openDeleteConfirm = openDeleteConfirm;
   }
 
   _setEventListeners() {
@@ -11,8 +22,17 @@ export default class Card {
       this._handleImagePreviewClick({ link: this._link, name: this._name });
     });
 
+    // this._deleteButton.addEventListener("click", () => {
+    //   if (!this._id) {
+    //     this.removeCard(); // fallback cards
+    //     return;
+    //   }
+
+    //   this._openDeleteConfirm(this._id, () => this.removeCard());
+    // });
+
     this._deleteButton.addEventListener("click", () => {
-      this._handleDeleteCard();
+      this._openDeleteConfirm(this._id, () => this.removeCard());
     });
 
     this._likeButton.addEventListener("click", () => {
@@ -20,13 +40,30 @@ export default class Card {
     });
   }
 
-  _handleDeleteCard() {
+  removeCard() {
     this._cardElement.remove();
     this._cardElement = null;
   }
 
+  // handleDeleteClick(cardId) {
+  //   api.deleteCard(cardId).then(() => {
+  //     handleRemoveCard();
+  //     deleteConfirmPopup.close();
+  //   });
+  // }
+
   _handleLikeButton() {
     this._likeButton.classList.toggle("card__like-button_active");
+  }
+
+  handleLikeClick(cardId, isLiked) {
+    const request = isLiked ? api.dislikeCard(cardId) : api.likeCard(cardId);
+
+    request
+      .then((updatedCard) => {
+        this.updateLikes(updatedCard.likes);
+      })
+      .catch(console.error);
   }
 
   getTemplate() {
