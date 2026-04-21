@@ -35,4 +35,9 @@ export default class PopupWithForm extends Popup {
       ? loadingText
       : this._defaultButtonText;
   }
+
+  close() {
+    super.close();
+    this._popupForm.reset();
+  }
 }

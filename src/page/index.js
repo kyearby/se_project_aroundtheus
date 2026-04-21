@@ -95,7 +95,7 @@ const deleteConfirmPopup = new PopupWithConfirmation({
 
 const cardList = new Section(
   {
-    items: initialCards,
+    items: [],
     renderer: (cardData) => {
       const cardElement = createCard(cardData);
       cardList.addItem(cardElement);
@@ -121,7 +121,7 @@ Promise.all([api.getUserInfo(), api.getCards()])
   })
   .catch((err) => {
     console.error(err);
-    cardList.renderItems(initialCards);
+    // cardList.renderItems(initialCards);
   });
 
 // Card create function
@@ -145,22 +145,43 @@ function openDeleteConfirm(cardId, handleRemoveCard) {
   deleteConfirmPopup.setSubmitAction(() => {
     deleteConfirmPopup.renderLoading(true);
 
-    if (!cardId) {
-      handleRemoveCard(); // local-only card
-      deleteConfirmPopup.close();
-      return;
-    }
-
     api
       .deleteCard(cardId)
       .then(() => {
-        handleRemoveCard();
+        handleRemoveCard(); // removes card from UI
         deleteConfirmPopup.close();
       })
-      .catch(console.error)
-      .finally(() => deleteConfirmPopup.renderLoading(false));
+      .catch((err) => {
+        console.error("DELETE FAILED:", err);
+      })
+      .finally(() => {
+        deleteConfirmPopup.renderLoading(false);
+      });
   });
 }
+
+// function openDeleteConfirm(cardId, handleRemoveCard) {
+//   deleteConfirmPopup.open();
+
+//   deleteConfirmPopup.setSubmitAction(() => {
+//     deleteConfirmPopup.renderLoading(true);
+
+//     // if (!cardId) {
+//     //   handleRemoveCard();
+//     //   deleteConfirmPopup.close();
+//     //   return;
+//     // }
+
+//     api
+//       .deleteCard(cardId)
+//       .then(() => {
+//         handleRemoveCard();
+//         deleteConfirmPopup.close();
+//       })
+//       .catch(console.error)
+//       .finally(() => deleteConfirmPopup.renderLoading(false));
+//   });
+// }
 
 // Event Listeners
 

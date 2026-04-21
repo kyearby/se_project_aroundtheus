@@ -22,17 +22,9 @@ export default class Card {
       this._handleImagePreviewClick({ link: this._link, name: this._name });
     });
 
-    // this._deleteButton.addEventListener("click", () => {
-    //   if (!this._id) {
-    //     this.removeCard(); // fallback cards
-    //     return;
-    //   }
-
-    //   this._openDeleteConfirm(this._id, () => this.removeCard());
-    // });
-
     this._deleteButton.addEventListener("click", () => {
       this._openDeleteConfirm(this._id, () => this.removeCard());
+      console.log("CARD ID:", this._id);
     });
 
     this._likeButton.addEventListener("click", () => {
@@ -44,13 +36,6 @@ export default class Card {
     this._cardElement.remove();
     this._cardElement = null;
   }
-
-  // handleDeleteClick(cardId) {
-  //   api.deleteCard(cardId).then(() => {
-  //     handleRemoveCard();
-  //     deleteConfirmPopup.close();
-  //   });
-  // }
 
   _handleLikeButton() {
     this._likeButton.classList.toggle("card__like-button_active");
