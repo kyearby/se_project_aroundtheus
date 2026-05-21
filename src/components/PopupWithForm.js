@@ -29,7 +29,6 @@ export default class PopupWithForm extends Popup {
       this._handleFormSubmit(this._getInputValues());
     });
   }
-
   renderLoading(isLoading, loadingText = "Saving...") {
     this._submitButton.textContent = isLoading
       ? loadingText
@@ -38,6 +37,6 @@ export default class PopupWithForm extends Popup {
 
   close() {
     super.close();
-    this._popupForm.reset();
+    // this._popupForm.reset();
   }
 }

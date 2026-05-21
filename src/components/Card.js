@@ -24,7 +24,6 @@ export default class Card {
 
     this._deleteButton.addEventListener("click", () => {
       this._openDeleteConfirm(this._id, () => this.removeCard());
-      console.log("CARD ID:", this._id);
     });
 
     this._likeButton.addEventListener("click", () => {

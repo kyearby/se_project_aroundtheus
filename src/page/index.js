@@ -6,11 +6,12 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import UserInfo from "../components/UserInfo.js";
-import { initialCards, validationSettings } from "../utils/constants.js";
+import { validationSettings } from "../utils/constants.js";
 import Api from "../utils/Api.js";
 
 const editFormElement = document.querySelector("#edit-profile-form");
 const addFormElement = document.querySelector("#add-card-form");
+const avatarFormElement = document.querySelector("#add-profile-form");
 const profileEditButton = document.querySelector("#profile-edit-button");
 const addNewCardButton = document.querySelector(".profile__add-button");
 const nameInput = document.querySelector("#name-input");
@@ -48,6 +49,7 @@ const editProfilePopup = new PopupWithForm({
       .updateUserInfo({ name, about: description })
       .then((user) => {
         userInfo.setUserInfo(user);
+        editProfilePopup.resetForm();
         editProfilePopup.close();
       })
       .catch(console.error)
@@ -65,7 +67,9 @@ const addCardPopup = new PopupWithForm({
       .then((cardData) => {
         const newCard = createCard(cardData);
         cardList.addItem(newCard);
+        addCardPopup.resetForm();
         addCardPopup.close();
+        addFormValidator.disableSubmitButton();
       })
       .catch(console.error)
       .finally(() => addCardPopup.renderLoading(false));
@@ -80,7 +84,9 @@ const avatarPopup = new PopupWithForm({
       .updateAvatar({ avatar })
       .then((user) => {
         userInfo.setUserAvatar(user.avatar);
+        avatarPopup.resetForm();
         avatarPopup.close();
+        avatarFormValidator.disableSubmitButton();
       })
       .catch(console.error)
       .finally(() => avatarPopup.renderLoading(false));
@@ -121,7 +127,6 @@ Promise.all([api.getUserInfo(), api.getCards()])
   })
   .catch((err) => {
     console.error(err);
-    // cardList.renderItems(initialCards);
   });
 
 // Card create function
@@ -160,29 +165,6 @@ function openDeleteConfirm(cardId, handleRemoveCard) {
   });
 }
 
-// function openDeleteConfirm(cardId, handleRemoveCard) {
-//   deleteConfirmPopup.open();
-
-//   deleteConfirmPopup.setSubmitAction(() => {
-//     deleteConfirmPopup.renderLoading(true);
-
-//     // if (!cardId) {
-//     //   handleRemoveCard();
-//     //   deleteConfirmPopup.close();
-//     //   return;
-//     // }
-
-//     api
-//       .deleteCard(cardId)
-//       .then(() => {
-//         handleRemoveCard();
-//         deleteConfirmPopup.close();
-//       })
-//       .catch(console.error)
-//       .finally(() => deleteConfirmPopup.renderLoading(false));
-//   });
-// }
-
 // Event Listeners
 
 profileEditButton.addEventListener("click", () => {
@@ -201,7 +183,11 @@ const editFormValidator = new FormValidator(
 
 const addFormValidator = new FormValidator(validationSettings, addFormElement);
 
+const avatarFormValidator = new FormValidator(
+  validationSettings,
+  avatarFormElement
+);
+
 editFormValidator.enableValidation();
 addFormValidator.enableValidation();
-
-cardList.renderItems();
+avatarFormValidator.enableValidation();
