@@ -27,6 +27,7 @@ const api = new Api({
 });
 
 export default api;
+let currentUserId;
 
 // Popups
 
@@ -120,6 +121,8 @@ deleteConfirmPopup.setEventListeners();
 
 Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
+    currentUserId = userData._id;
+
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData.avatar);
 
@@ -135,12 +138,14 @@ function createCard(cardData) {
   const card = new Card(
     cardData,
     "#card-template",
+    currentUserId,
     (data) => imagePopup.open(data),
     (cardId) => api.deleteCard(cardId),
     (cardId, isLiked) =>
       isLiked ? api.dislikeCard(cardId) : api.likeCard(cardId),
     openDeleteConfirm
   );
+
   return card.getView();
 }
 
@@ -153,7 +158,7 @@ function openDeleteConfirm(cardId, handleRemoveCard) {
     api
       .deleteCard(cardId)
       .then(() => {
-        handleRemoveCard(); // removes card from UI
+        handleRemoveCard();
         deleteConfirmPopup.close();
       })
       .catch((err) => {

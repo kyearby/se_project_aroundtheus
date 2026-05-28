@@ -2,6 +2,7 @@ export default class Card {
   constructor(
     cardData,
     cardTemplate,
+    userId,
     handleImagePreviewClick,
     handleDeleteRequest,
     handleLikeRequest,
@@ -10,6 +11,8 @@ export default class Card {
     this._name = cardData.name;
     this._link = cardData.link;
     this._id = cardData._id;
+    this._userId = userId;
+    this._likes = Array.isArray(cardData.likes) ? cardData.likes : [];
     this._cardTemplate = cardTemplate;
     this._handleImagePreviewClick = handleImagePreviewClick;
     this._handleDeleteRequest = handleDeleteRequest;
@@ -27,27 +30,25 @@ export default class Card {
     });
 
     this._likeButton.addEventListener("click", () => {
-      this._handleLikeButton();
+      const isLiked = this._likeButton.classList.contains(
+        "card__like-button_active"
+      );
+
+      this._handleLikeRequest(this._id, isLiked)
+        .then((updatedCard) => {
+          this._likes = updatedCard.likes || [];
+
+          this._likeButton.classList.toggle("card__like-button_active");
+        })
+        .catch((err) => {
+          console.error("LIKE ERROR:", err);
+        });
     });
   }
 
   removeCard() {
     this._cardElement.remove();
     this._cardElement = null;
-  }
-
-  _handleLikeButton() {
-    this._likeButton.classList.toggle("card__like-button_active");
-  }
-
-  handleLikeClick(cardId, isLiked) {
-    const request = isLiked ? api.dislikeCard(cardId) : api.likeCard(cardId);
-
-    request
-      .then((updatedCard) => {
-        this.updateLikes(updatedCard.likes);
-      })
-      .catch(console.error);
   }
 
   getTemplate() {
@@ -68,7 +69,9 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardTitle.textContent = this._name;
-
+    if (this._likes.some((like) => String(like._id) === String(this._userId))) {
+      this._likeButton.classList.add("card__like-button_active");
+    }
     this._setEventListeners();
     return this._cardElement;
   }
