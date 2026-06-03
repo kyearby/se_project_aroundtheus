@@ -12,7 +12,7 @@ export default class Card {
     this._link = cardData.link;
     this._id = cardData._id;
     this._userId = userId;
-    this._likes = Array.isArray(cardData.likes) ? cardData.likes : [];
+    this._isLiked = cardData.isLiked || false;
     this._cardTemplate = cardTemplate;
     this._handleImagePreviewClick = handleImagePreviewClick;
     this._handleDeleteRequest = handleDeleteRequest;
@@ -30,15 +30,14 @@ export default class Card {
     });
 
     this._likeButton.addEventListener("click", () => {
-      const isLiked = this._likeButton.classList.contains(
-        "card__like-button_active"
-      );
-
-      this._handleLikeRequest(this._id, isLiked)
+      this._handleLikeRequest(this._id, this._isLiked)
         .then((updatedCard) => {
-          this._likes = updatedCard.likes || [];
+          this._isLiked = updatedCard.isLiked;
 
-          this._likeButton.classList.toggle("card__like-button_active");
+          this._likeButton.classList.toggle(
+            "card__like-button_active",
+            this._isLiked
+          );
         })
         .catch((err) => {
           console.error("LIKE ERROR:", err);
@@ -69,9 +68,11 @@ export default class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardTitle.textContent = this._name;
-    if (this._likes.some((like) => String(like._id) === String(this._userId))) {
+
+    if (this._isLiked) {
       this._likeButton.classList.add("card__like-button_active");
     }
+
     this._setEventListeners();
     return this._cardElement;
   }

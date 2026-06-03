@@ -124,6 +124,7 @@
 }
 
 .modal__error-description {
+  display: block;
   font-size: 12px;
   color: #ff0000;
   position: absolute;

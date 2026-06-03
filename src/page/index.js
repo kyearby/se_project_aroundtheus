@@ -123,6 +123,8 @@ Promise.all([api.getUserInfo(), api.getCards()])
   .then(([userData, cards]) => {
     currentUserId = userData._id;
 
+    console.log("CURRENT USER ID:", currentUserId);
+
     userInfo.setUserInfo(userData);
     userInfo.setUserAvatar(userData.avatar);
 
@@ -135,6 +137,8 @@ Promise.all([api.getUserInfo(), api.getCards()])
 // Card create function
 
 function createCard(cardData) {
+  console.log("FULL CARD DATA:", cardData);
+
   const card = new Card(
     cardData,
     "#card-template",
